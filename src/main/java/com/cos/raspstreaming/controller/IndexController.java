@@ -5,9 +5,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class IndexController {
+	
 	@GetMapping({"", "/"})
 	public String index() {
-		System.out.println("나 실행돼?");
 		return "index";
+	}
+	
+	@GetMapping("/auth/joinForm")
+	public String joinForm() {
+		return "auth/joinForm";
+	}
+	
+	@GetMapping("/auth/loginForm")
+	public String loginForm() {
+		return "auth/loginForm";
 	}
 }
