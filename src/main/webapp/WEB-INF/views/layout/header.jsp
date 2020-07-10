@@ -39,8 +39,8 @@
 							<li class="nav-item"><a class="nav-link" href="/auth/joinForm">회원가입</a></li>
 						</c:when>
 						<c:otherwise>
-							<li class="nav-item"><a class="nav-link" href="#">사진업로드</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">영상업로드</a></li>
+							<li class="nav-item"><a class="nav-link" href="/picture/uploadForm">사진업로드</a></li>
+							<li class="nav-item"><a class="nav-link" href="/video/uploadForm">영상업로드</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">영상재생</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">사진재생</a></li>
 							<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
