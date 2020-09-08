@@ -1,15 +1,11 @@
-package com.cos.raspstreaming.domain.user;
+package com.cos.raspstreaming.domain.room;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
 
 import com.cos.raspstreaming.domain.BaseTimeEntity;
 import com.cos.raspstreaming.domain.company.Company;
@@ -24,32 +20,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class User extends BaseTimeEntity{
-	
+public class Room extends BaseTimeEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(nullable = false)	
-	private String username;
-	@Column(nullable = false)
-	private String password;
-	
+	private int roomNum;
+	 
 	@ManyToOne
 	@JoinColumn(name = "companyId")
 	private Company company;
 	
-	@Column(nullable = false)
-	private String phone;
-	
-	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
-	private Role role;
-	
-	@Transient
-	private Long companyId;
-	
-	public String getRoleKey() {
-		return this.role.getKey();
-	}
 	
 }

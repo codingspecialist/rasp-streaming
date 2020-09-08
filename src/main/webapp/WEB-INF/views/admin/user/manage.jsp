@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ include file="../layout/header.jsp"%>
+<%@ include file="../../layout/header.jsp"%>
 <main>
 	<div class="container">
 		<table class="table table-hover">
@@ -20,7 +20,7 @@
 					<tr>
 						<td>${user.id}</td>
 						<td>${user.username }</td>
-						<td>${user.companyName}</td>
+						<td>${user.company.name}</td>
 						<td>${user.phone}</td>
 						<td><button onclick="initPassword(${user.id})" class="btn btn-primary">초기화</button></td>
 						<td>
@@ -61,4 +61,4 @@
 		</ul>
 	</div>
 </main>
-<%@ include file="../layout/footer.jsp"%>
+<%@ include file="../../layout/footer.jsp"%>

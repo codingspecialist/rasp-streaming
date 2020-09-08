@@ -8,8 +8,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.cos.raspstreaming.domain.user.User;
 
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+@Data
 @RequiredArgsConstructor
 public class PrincipalDetail implements UserDetails{
 	private static final long serialVersionUID = 1L;

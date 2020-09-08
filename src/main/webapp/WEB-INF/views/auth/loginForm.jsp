@@ -6,7 +6,7 @@
 		<div class="d-flex justify-content-center" >
 			<div class="card align-self-center" style="width: 40rem; border-radius: 20px;">
 				<div class="card-body">
-					<form action="/auth/loginProc" method="POST">
+					<form action="/auth/login" method="POST">
 						<input name="username" type="text" class="form-control" placeholder="Username" required autofocus>
 						<br/> 
 						<input name="password" type="password" class="form-control" placeholder="Password" required>

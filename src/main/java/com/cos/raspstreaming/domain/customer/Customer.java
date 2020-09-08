@@ -1,18 +1,15 @@
-package com.cos.raspstreaming.domain.user;
+package com.cos.raspstreaming.domain.customer;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
 
 import com.cos.raspstreaming.domain.BaseTimeEntity;
 import com.cos.raspstreaming.domain.company.Company;
+import com.cos.raspstreaming.domain.room.Room;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,32 +21,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class User extends BaseTimeEntity{
-	
+public class Customer extends BaseTimeEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(nullable = false)	
-	private String username;
-	@Column(nullable = false)
-	private String password;
+	
+	private String name;
+	private String phone;
 	
 	@ManyToOne
 	@JoinColumn(name = "companyId")
 	private Company company;
 	
-	@Column(nullable = false)
-	private String phone;
-	
-	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
-	private Role role;
-	
-	@Transient
-	private Long companyId;
-	
-	public String getRoleKey() {
-		return this.role.getKey();
-	}
-	
+	@ManyToOne
+	@JoinColumn(name = "roomId")
+	private Room room;
 }

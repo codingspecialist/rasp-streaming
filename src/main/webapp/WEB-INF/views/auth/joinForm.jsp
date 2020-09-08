@@ -9,7 +9,7 @@
 			<div class="card align-self-center" style="width: 40rem; border-radius: 20px;">
 			
 				<div class="card-body">
-					<form action="/auth/joinProc" method="POST">
+					<form action="/auth/join" method="POST">
 						<h6 class="form-signin-heading">회원가입 후 010-0000-0000로 연락주셔야 서비스 이용이 가능합니다.</h6>
 						<input name="username" type="text" class="form-control" placeholder="Username" required autofocus>
 						<br/> 
@@ -17,7 +17,12 @@
 						<br/>
 						<input id="join--password-check" type="password" class="form-control" placeholder="Password Check" required>
 						<br/>
-						<input name="companyName" type="text" class="form-control" placeholder="Company Name" required>
+						<select name="companyId" class="form-control">
+							<option value="0">회사선택안함</option>
+							<c:forEach var="company" items="${companys}">
+								<option value="${company.id}">${company.name}</option>
+							</c:forEach>
+						</select>
 						<br/>
 						<input name="phone" type="text" class="form-control" placeholder="01088880000" required>
 						<br/>

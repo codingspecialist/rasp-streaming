@@ -29,7 +29,6 @@
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-
 			<!-- Navbar links -->
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav">
@@ -39,10 +38,24 @@
 							<li class="nav-item"><a class="nav-link" href="/auth/joinForm">회원가입</a></li>
 						</c:when>
 						<c:otherwise>
-							<li class="nav-item"><a class="nav-link" href="/picture/uploadForm">사진업로드</a></li>
-							<li class="nav-item"><a class="nav-link" href="/video/uploadForm">영상업로드</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">영상재생</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">사진재생</a></li>
+							
+							<c:if test="${principal.user.role.key == 'ROLE_MANAGER' }">
+								<li class="nav-item"><a class="nav-link" href="/manager/picture/saveForm">사진업로드</a></li>
+								<li class="nav-item"><a class="nav-link" href="/manager/video/saveForm">영상업로드</a></li>
+								<li class="nav-item"><a class="nav-link" href="/manager/room/saveForm">호실등록</a></li>
+								<li class="nav-item"><a class="nav-link" href="/manager/room">호실관리</a></li>
+								<li class="nav-item"><a class="nav-link" href="/manager/customer/saveForm">고객등록</a></li>
+								<li class="nav-item"><a class="nav-link" href="/manager/customer">고객관리</a></li>
+							</c:if>
+
+							<c:if test="${principal.user.role.key == 'ROLE_ADMIN' }">
+								<li class="nav-item"><a class="nav-link" href="/admin/user">회원관리</a></li>
+								<li class="nav-item"><a class="nav-link" href="/admin/company">회사관리</a></li>
+								<li class="nav-item"><a class="nav-link" href="/admin/company/saveForm">회사등록</a></li>
+							</c:if>
+
 							<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
 						</c:otherwise>
 					</c:choose>

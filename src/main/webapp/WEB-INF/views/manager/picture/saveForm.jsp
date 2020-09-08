@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../layout/header.jsp"%>
+<%@ include file="../../layout/header.jsp"%>
 
 <style type="text/css">
 input[type=file] {
@@ -50,7 +50,7 @@ input[type=file] {
 		</div>
 	</div>
 
-	<a href="javascript:" class="my_button" onclick="submitAction();">사진 업로드</a>
+	<a href="javascript:" class="my_button" onclick="submitAction()">사진 업로드</a>
 
 
 </div>
@@ -120,13 +120,13 @@ input[type=file] {
 
 	function submitAction() {
 		console.log("업로드 파일 갯수 : " + sel_files.length);
-		var data = new FormData();
+		var formData = new FormData();
 
 		for (var i = 0, len = sel_files.length; i < len; i++) {
 			//var name = "files" + i;
-			data.append("files", sel_files[i]);
+			formData.append("files", sel_files[i]);
 		}
-		data.append("image_count", sel_files.length);
+		formData.append("image_count", sel_files.length);
 
 		
 		if (sel_files.length < 1) {
@@ -134,18 +134,24 @@ input[type=file] {
 			return;
 		}
 
-		var xhr = new XMLHttpRequest();
-		xhr.open("POST", "/picture/uploadProc");
-		xhr.onload = function(e) {
-			if (this.status == 200) {
-				console.log("Result : " + e.currentTarget.responseText);
-			}
-		}
+		$.ajax({
+			type: "POST",
+			url: "/manager/picture",
+			data: formData,
+			enctype: "multipart/form-data",
+			contentType: false,
+			processData : false
+		}).done(function(res){
+			console.log("success", res);
+			alert("사진 업로드 완료");
+			location.reload();
+		}).fail(function(error){
+			console.log("error", error);
+		});
 
-		xhr.send(data);
-		console.log(data);
+		console.log(formData);
 	}
 </script>
 
 
-<%@ include file="../layout/footer.jsp"%>
+<%@ include file="../../layout/footer.jsp"%>
