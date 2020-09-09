@@ -30,11 +30,8 @@ public class UserService {
 	
 	@Transactional
 	public void 회원가입(User user) {
-		Company companyEntity = companyRepository.findById(user.getCompanyId()).orElseGet(new Supplier<Company>() {
-			@Override
-			public Company get() {
+		Company companyEntity = companyRepository.findById(user.getCompanyId()).orElseGet(() -> {
 				return null;
-			}
 		});
 		user.setRole(Role.USER);
 		user.setPassword(encoder.encode(user.getPassword()));

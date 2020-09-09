@@ -7,8 +7,7 @@ input[type=file] {
 }
 
 .my_button {
-	display: inline-block;
-	width: 200px;
+	display: block;
 	text-align: center;
 	padding: 10px;
 	background-color: #006BCC;
@@ -35,9 +34,15 @@ input[type=file] {
 <div class="container">
 
 	<div>
-		<h2>
-			<b>사진 전송 페이지</b>
-		</h2>
+	    <!-- Save될 때 호실번호로 Funeral(장례식) useState가 활성환된 오브젝트를 찾고 
+	    그 Funeral 오브젝트를 이용해서 Flower 오브젝트 생성 
+	    그 Flower 오브젝트를 이용해서 Picture 객체 생성 후 Save하기-->
+		<select class="form-control">
+			<option>호실선택</option>
+			<option>101호실</option>
+		</select>
+		<input type="text" name="customerName" class="form-control" placeholder="화환고객명"/>
+		<input type="text" name="customerPhone" class="form-control" placeholder="화환고객전화번호"/><br/>
 		<div class="input_wrap">
 			<a href="javascript:" onclick="fileUploadAction();" class="my_button">사진 선택</a> 
 			<input type="file" id="input_imgs" multiple />
@@ -51,107 +56,9 @@ input[type=file] {
 	</div>
 
 	<a href="javascript:" class="my_button" onclick="submitAction()">사진 업로드</a>
-
-
 </div>
 
-<script>
-	// 이미지 정보들을 담을 배열
-	var sel_files = [];
 
-	$(document).ready(function() {
-		$("#input_imgs").on("change", handleImgFileSelect);
-	});
-
-	function fileUploadAction() {
-		console.log("fileUploadAction");
-		$("#input_imgs").trigger('click');
-	}
-
-	function handleImgFileSelect(e) {
-
-		// 이미지 정보들을 초기화
-		sel_files = [];
-		$(".imgs_wrap").empty();
-
-		var files = e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
-
-		var index = 0;
-		filesArr
-				.forEach(function(f) {
-					if (!f.type.match("image.*")) {
-						alert("확장자는 이미지 확장자만 가능합니다.");
-						return;
-					}
-
-					sel_files.push(f);
-
-					var reader = new FileReader();
-					reader.onload = function(e) {
-						var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("
-								+ index
-								+ ")\" id=\"img_id_"
-								+ index
-								+ "\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'></a>";
-						$(".imgs_wrap").append(html);
-						index++;
-
-					}
-					reader.readAsDataURL(f);
-
-				});
-	}
-
-	function deleteImageAction(index) {
-		console.log("index : " + index);
-		console.log("sel length : " + sel_files.length);
-
-		sel_files.splice(index, 1);
-
-		var img_id = "#img_id_" + index;
-		$(img_id).remove();
-	}
-
-	function fileUploadAction() {
-		console.log("fileUploadAction");
-		$("#input_imgs").trigger('click');
-	}
-
-	function submitAction() {
-		console.log("업로드 파일 갯수 : " + sel_files.length);
-		var formData = new FormData();
-
-		for (var i = 0, len = sel_files.length; i < len; i++) {
-			//var name = "files" + i;
-			formData.append("files", sel_files[i]);
-		}
-		formData.append("image_count", sel_files.length);
-
-		
-		if (sel_files.length < 1) {
-			alert("한개이상의 파일을 선택해주세요.");
-			return;
-		}
-
-		$.ajax({
-			type: "POST",
-			url: "/manager/picture",
-			data: formData,
-			enctype: "multipart/form-data",
-			contentType: false,
-			processData : false
-		}).done(function(res){
-			console.log("success", res);
-			alert("사진 업로드 완료");
-			location.reload();
-		}).fail(function(error){
-			console.log("error", error);
-		});
-
-		console.log(formData);
-	}
-</script>
-
+<script src="/js/picture.js"></script>
 
 <%@ include file="../../layout/footer.jsp"%>

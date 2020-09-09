@@ -23,7 +23,7 @@
 	<header>
 		<nav class="navbar navbar-expand-md bg-dark navbar-dark">
 			<!-- Brand -->
-			<a class="navbar-brand" href="#">홈</a>
+			<a class="navbar-brand" href="/">홈</a>
 
 			<!-- Toggler/collapsibe Button -->
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -46,8 +46,10 @@
 								<li class="nav-item"><a class="nav-link" href="/manager/video/saveForm">영상업로드</a></li>
 								<li class="nav-item"><a class="nav-link" href="/manager/room/saveForm">호실등록</a></li>
 								<li class="nav-item"><a class="nav-link" href="/manager/room">호실관리</a></li>
-								<li class="nav-item"><a class="nav-link" href="/manager/customer/saveForm">고객등록</a></li>
-								<li class="nav-item"><a class="nav-link" href="/manager/customer">고객관리</a></li>
+								<li class="nav-item"><a class="nav-link" href="/manager/funeral/saveForm">장례식등록</a></li>
+								<li class="nav-item"><a class="nav-link" href="/manager/funeral">장례식관리</a></li>
+								<li class="nav-item"><a class="nav-link" href="/manager/flower/saveForm">화환등록</a></li>
+								<li class="nav-item"><a class="nav-link" href="/manager/flower">화환관리</a></li>
 							</c:if>
 
 							<c:if test="${principal.user.role.key == 'ROLE_ADMIN' }">

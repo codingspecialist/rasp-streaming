@@ -45,8 +45,8 @@ public class User extends BaseTimeEntity{
 	@Column(nullable = false)
 	private Role role;
 	
-	@Transient
-	private Long companyId;
+	@Transient // DTO 만들기 싫어서 사용
+	private long companyId; 
 	
 	public String getRoleKey() {
 		return this.role.getKey();

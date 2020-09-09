@@ -10,6 +10,8 @@ import javax.persistence.OneToMany;
 
 import com.cos.raspstreaming.domain.BaseTimeEntity;
 import com.cos.raspstreaming.domain.room.Room;
+import com.cos.raspstreaming.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,8 +31,12 @@ public class Company extends BaseTimeEntity{
 	private String address;
 	private String phone;
 	
+	@JsonIgnoreProperties({"company"})
 	@OneToMany(mappedBy = "company")
-	private List<Room> room;
+	private List<User> users;
+	
+	@OneToMany(mappedBy = "company")
+	private List<Room> rooms;
 }
 
 
