@@ -51,14 +51,6 @@ public class ManagerController {
 		return "/manager/funeral/saveForm";
 	}
 	
-	@GetMapping("/test/manager/funeral/saveForm")
-	public @ResponseBody List<Room> testFuneralSaveForm(@AuthenticationPrincipal PrincipalDetail principalDetail, Model model) {
-		// 비활성 호실 모두 가져오기
-		long userId = principalDetail.getUser().getId();
-		 
-		return null;
-	}
-	
 	@GetMapping("/manager/room")
 	public String roomManage(@AuthenticationPrincipal PrincipalDetail principalDetail, Model model, 
 			@PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable) {
@@ -95,7 +87,14 @@ public class ManagerController {
 	@PostMapping("/manager/funeral")
 	public String funeralSave(Funeral funeral, @AuthenticationPrincipal PrincipalDetail principalDetail, Model model) {
 		System.out.println("funeral : "+funeral);
-		return "/manager/funeral/saveForm";
+		managerService.장례식등록(funeral, principalDetail.getUser().getCompany());
+		return "redirect:/manager/funeral";
+	}
+	
+	// 이 부분 수정해야함. 장례식장 관리 페이지
+	@GetMapping("/manager/funeral")
+	public @ResponseBody String funeral(@AuthenticationPrincipal PrincipalDetail principalDetail, Model model) {
+		return "/manager/funeral/manage";
 	}
 
 }

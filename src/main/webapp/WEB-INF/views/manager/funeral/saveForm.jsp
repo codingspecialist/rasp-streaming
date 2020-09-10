@@ -32,13 +32,5 @@
 	</div>
 </main>
 
-<script>
-	$("#startDate").on('change', function(e){
-		console.log(e.target.value);
-		let startDate = e.target.value;
-		
-		
-	})
-</script>
-
+<script src="/js/funeral.js"></script>
 <%@ include file="../../layout/footer.jsp"%>

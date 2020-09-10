@@ -15,15 +15,18 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Configuration // 빈 등록 (객체 생성)
 @EnableWebSecurity // 필터 체인에 등록 (스프링 시큐리티 활성화)
-@EnableGlobalMethodSecurity(prePostEnabled = true) // 특정 주소 접근시 권한 및 인증을 pre(미리) 체크하겠다.
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true) // 특정 주소 접근시 권한 및 인증을 pre(미리) 체크하겠다.
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private final UserDetailsService userDetailService;
+	private final CorsConfig corsConfig;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable()
+		http.addFilter(corsConfig.corsFilter())
+		.csrf().disable()
 		.authorizeRequests()
+		.antMatchers("/api/**").authenticated()
 		.antMatchers("/", "/user/**").access("hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
 		.antMatchers("/manager/**").access("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
 		.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
