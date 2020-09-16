@@ -14,6 +14,7 @@ import javax.persistence.Transient;
 import com.cos.raspstreaming.domain.BaseTimeEntity;
 import com.cos.raspstreaming.domain.company.Company;
 import com.cos.raspstreaming.domain.room.Room;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,10 +34,12 @@ public class Funeral extends BaseTimeEntity {
 	private String customerName; // 장례신청한 고객명
 	private String customerPhone; // 장례신청한 고객전화번호
 	
+	@JsonIgnoreProperties({"users", "rooms"})
 	@ManyToOne
 	@JoinColumn(name = "companyId")
 	private Company company; // 로그인한 매니저 아이디로 넣기
 	
+	@JsonIgnoreProperties({"company", "funerals"})
 	@ManyToOne // OneToOne이 맞음. 그런데 room 마다 하나의 장례식만 있기 때문. 그런데 데이터가 쌓이면 room마다 여러개의 장례식이 생길 수 있음. 활성화여부 필요(네이티브쿼리) 
 	@JoinColumn(name = "roomId")
 	private Room room; // 몇호실에 신청됐는지 넣기

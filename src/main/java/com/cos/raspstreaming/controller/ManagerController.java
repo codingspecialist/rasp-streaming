@@ -87,13 +87,17 @@ public class ManagerController {
 	@PostMapping("/manager/funeral")
 	public String funeralSave(Funeral funeral, @AuthenticationPrincipal PrincipalDetail principalDetail, Model model) {
 		System.out.println("funeral : "+funeral);
-		managerService.장례식등록(funeral, principalDetail.getUser().getCompany());
+		Company company = principalDetail.getUser().getCompany();
+		managerService.장례식등록(funeral, company);
 		return "redirect:/manager/funeral";
 	}
 	
 	// 이 부분 수정해야함. 장례식장 관리 페이지
 	@GetMapping("/manager/funeral")
-	public @ResponseBody String funeral(@AuthenticationPrincipal PrincipalDetail principalDetail, Model model) {
+	public String funeral(@AuthenticationPrincipal PrincipalDetail principalDetail, Model model, 
+			@PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable) {
+		long companyId = principalDetail.getUser().getCompany().getId();	
+		model.addAttribute("funerals", managerService.장례식관리(companyId, pageable));
 		return "/manager/funeral/manage";
 	}
 

@@ -55,6 +55,10 @@ public class ManagerService {
 		
 		funeralRepository.save(funeral);
 	}
+	
+	public Page<Funeral> 장례식관리(long companyId, Pageable pageable){
+		return funeralRepository.findByCompanyId(companyId, pageable);
+	}
 }
 
 

@@ -39,7 +39,6 @@ input[type=file] {
 	    그 Flower 오브젝트를 이용해서 Picture 객체 생성 후 Save하기-->
 		<select class="form-control">
 			<option>호실선택</option>
-			<option>101호실</option>
 		</select>
 		<input type="text" name="customerName" class="form-control" placeholder="화환고객명"/>
 		<input type="text" name="customerPhone" class="form-control" placeholder="화환고객전화번호"/><br/>
